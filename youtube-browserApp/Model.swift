@@ -22,7 +22,18 @@ class Model {
                 return
             }
             
+            guard let data = data else { return }
             
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+
+                let response = try decoder.decode(Response.self, from: data)
+                
+                dump(response)
+            } catch {
+                
+            }
         }
         
         dataTask.resume()
